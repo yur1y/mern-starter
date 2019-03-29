@@ -4,6 +4,7 @@ import callApi from '../../util/apiCaller';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_COMMENTS = 'ADD_COMMENTS';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 
 // Export Actions
 export function addComment(comment) {
@@ -15,9 +16,6 @@ export function addComment(comment) {
 
 export function addCommentRequest(comment) {
   return (dispatch) => {
-
-      console.log(comment, '___111')
-
     return callApi('comments', 'post', {
       comment: {
         username: comment.username,
@@ -43,11 +41,6 @@ export function fetchComments(cuid) {
   };
 }
 
-export function fetchComment(cuid) {
-  return (dispatch) => {
-    return callApi(`comments/${cuid}`).then(res => dispatch(addComment(res.comment)));
-  };
-}
 
 export function deleteComment(cuid) {
   return {
@@ -59,5 +52,24 @@ export function deleteComment(cuid) {
 export function deleteCommentRequest(cuid) {
   return (dispatch) => {
     return callApi(`comments/${cuid}`, 'delete').then(() => dispatch(deleteComment(cuid)));
+  };
+}
+
+export function updateComment(comment) {
+  return {
+    type: UPDATE_COMMENT,
+    comment,
+  };
+}
+
+export function updateCommentRequest(comment) {
+  return (dispatch) => {
+    return callApi('comments', 'put', {
+      comment: {
+        username: comment.username,
+        text: comment.text,
+        cuid: comment.cuid,
+      },
+    }).then(res => dispatch(updateComment(comment)));
   };
 }

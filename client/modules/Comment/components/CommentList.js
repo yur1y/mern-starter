@@ -13,6 +13,7 @@ function CommentList(props) {
                       comment={comment}
                       key={comment.cuid}
                       onDelete={() => props.handleDeleteComment(comment.cuid)}
+                      onUpdate={() => props.handleUpdateComment(comment)}
                     />
                 ))
                 : 'No Comments yet'
@@ -28,6 +29,7 @@ CommentList.propTypes = {
     cuid: PropTypes.string.isRequired,
   })).isRequired,
   handleDeleteComment: PropTypes.func.isRequired,
+  handleUpdateComment: PropTypes.func.isRequired,
 };
 
 export default CommentList;

@@ -9,7 +9,7 @@ export class CommentCreateWidget extends Component {
   addComment = () => {
     const usernameRef = this.refs.username;
     const textRef = this.refs.text;
-    if (usernameRef.value && textRef.value ) {
+    if (usernameRef.value && textRef.value) {
       this.props.addComment(usernameRef.value, textRef.value);
       usernameRef.value = textRef.value = '';
     }

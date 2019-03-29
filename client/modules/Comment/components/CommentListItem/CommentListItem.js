@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import styles from './CommentListItem.css';
 
 function CommentListItem(props) {
-  var d = new Date(props.comment.dateAdded),
+  const d = new Date(props.comment.dateAdded),
     dformat = [d.getMonth() + 1,
                 d.getDate(),
                 d.getFullYear()].join('/') + ' ' +
@@ -18,6 +18,7 @@ function CommentListItem(props) {
         <div className={styles['single-post']}>
             <p className={styles['author-name']}>On {dformat}<FormattedMessage id="by" /> {props.comment.username}</p>
             <p className={styles['post-desc']}>{props.comment.text}</p>
+            <p className={styles['post-action']}><a href="#" onClick={props.onUpdate}><FormattedMessage id="updateComment" /></a></p>
              <p className={styles['post-action']}><a href="#" onClick={props.onDelete}><FormattedMessage id="deleteComment" /></a></p>
         </div>
     );
@@ -31,6 +32,7 @@ CommentListItem.propTypes = {
     dateAdded: PropTypes.string.isRequired,
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default CommentListItem;

@@ -7,7 +7,7 @@ import CommentList from '../components/CommentList';
 import CommentCreateWidget from '../components/CommentCreateWidget/CommentCreateWidget';
 
 // Import Actions
-import { addCommentRequest, fetchComments, deleteCommentRequest } from '../CommentActions';
+import { addCommentRequest, fetchComments, deleteCommentRequest, updateCommentRequest } from '../CommentActions';
 import { toggleAddComment } from '../../App/AppActions';
 
 // Import Selectors
@@ -40,11 +40,18 @@ class CommentListPage extends Component {
     }
     this.props.dispatch(toggleAddComment());
   };
+  handleUpdateComment = ({ text, cuid }) => {
+    const newText = prompt('Update your comment: ', text);
+
+    if (newText && newText !== text) {
+      this.props.dispatch(updateCommentRequest({ text: newText, cuid }));
+    }
+  };
 
   render() {
     return (
             <div> Comments:
-                <CommentList handleDeleteComment={this.handleDeleteComment} comments={this.props.comments} />
+                <CommentList handleDeleteComment={this.handleDeleteComment} handleUpdateComment={this.handleUpdateComment} comments={this.props.comments} />
                  <a className={styles['add-post-button']} href="#" onClick={this.handleAddComment}><FormattedMessage id="addPost" /></a>
                 <CommentCreateWidget addComment={this.handleRequestAddComment} showAddComment={this.props.showAddComment} />
             </div>
