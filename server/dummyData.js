@@ -1,4 +1,5 @@
 import Post from './models/post';
+import Comment from './models/comment';
 
 export default function () {
   Post.count().exec((err, count) => {
@@ -40,6 +41,20 @@ export default function () {
     Post.create([post1, post2], (error) => {
       if (!error) {
         // console.log('ready to go....');
+      }
+    });
+  });
+
+  Comment.count().exec((err, count) => {
+    if (count > 0) {
+      return;
+    }
+    const comment1 = new Comment({ username: 'Admin', text: 'Such a comment', cuid: 'asdasd', post_cuid: 'cikqgkv4q01ck7453ualdn3hf' });
+    const comment2 = new Comment({ username: 'Admin', text: 'Such a comment 2', cuid: 'assdsddasd', post_cuid: 'cikqgkv4q01ck7453ualdn3hf' });
+
+    Comment.create([comment1, comment2], (error) => {
+      if (!error) {
+            // console.log('ready to go....');
       }
     });
   });

@@ -1,4 +1,5 @@
 import Post from '../models/post';
+import Comment from '../models/comment';
 import cuid from 'cuid';
 import slug from 'limax';
 import sanitizeHtml from 'sanitize-html';
@@ -74,7 +75,14 @@ export function deletePost(req, res) {
     }
 
     post.remove(() => {
-      res.status(200).end();
+      Comment.deleteMany({ post_cuid: req.params.cuid }).exec((err, comments) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+        post.remove(() => {
+          res.status(200).end();
+        });
+      });
     });
   });
 }
