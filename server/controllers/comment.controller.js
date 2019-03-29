@@ -61,20 +61,19 @@ export function deleteComment(req, res) {
   });
 }
 
-// /**
-//  * Delete a post
-//  * @param req
-//  * @param res
-//  * @returns void
-//  */
-// export function updateComment(req, res) {
-//     Comment.findOne({ cuid: req.params.cuid }).exec((err, comment) => {
-//         if (err) {
-//             res.status(500).send(err);
-//         }
-//
-//         comment.remove(() => {
-//             res.status(200).end();
-//         });
-//     });
-// }
+/**
+ * Update a post
+ * @param req
+ * @param res
+ * @returns void
+ */
+export function updateComment(req, res) {
+  const { cuid, text } = req.body.comment;
+  Comment.findOneAndUpdate({ cuid }, { text }).exec((err, comment) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    res.json(comment);
+  });
+}

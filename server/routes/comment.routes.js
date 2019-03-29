@@ -6,7 +6,7 @@ const router = new Router();
 router.route('/:cuid').get(CommentController.getComments);
 
 // Edit one post by cuid
-// router.route('/posts/:cuid').put(CommentController.updatePost);
+router.route('/').put(CommentController.updateComment);
 
 // Add a new Comment
 router.route('/').post(CommentController.addComment);
