@@ -1,0 +1,4 @@
+{
+  "db": "mongodb://localhost/mean-starter",
+  "jwtPrivateKey":"mean-starter_jwtPrivateKey"
+}
