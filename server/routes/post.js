@@ -5,8 +5,8 @@ const admin = require('../middleware/admin');
 const {Post, validate} = require('../models/post');
 const express = require('express');
 const router = express.Router();
-import slug from 'limax';
-import sanitizeHtml from 'sanitize-html';
+const slug = require('limax');
+const sanitizeHtml =require('sanitize-html');
 
 router.get('/', async (req, res) => {
     const post = await Post.find().sort('createdAt');

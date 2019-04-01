@@ -4,7 +4,7 @@ const admin = require('../middleware/admin');
 
 const {Comment, validate} = require('../models/comment');
 const express = require('express');
-import sanitizeHtml from 'sanitize-html';
+const  sanitizeHtml = require('sanitize-html');
 
 const router = express.Router();
 
