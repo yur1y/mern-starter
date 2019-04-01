@@ -8,10 +8,10 @@ const  sanitizeHtml = require('sanitize-html');
 
 const router = express.Router();
 
-// router.get('/', async (req, res) => {
-//     const comment = await Comment.find().sort('createdAt');
-//     res.send(comment);
-// });
+router.get('/',[admin,auth], async (req, res) => {
+    const comment = await Comment.find().sort('createdAt');
+    res.send(comment);
+});
 
 router.get('/:id',  validateObjectId, async (req, res) => {
     const comment = await Comment.find({postId:req.params.id});

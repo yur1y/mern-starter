@@ -1,4 +1,4 @@
 {
-  "db": "mongodb://localhost/mean-starter",
-  "jwtPrivateKey":"mean-starter_jwtPrivateKey"
+  "db": "mongodb://localhost/mern-starter",
+  "jwtPrivateKey":"mern-starter_jwtPrivateKey"
 }
