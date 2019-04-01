@@ -12,6 +12,7 @@
     "joi": "^14.3.1",
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
+    "limax": "^1.7.0",
     "mongoose": "^5.4.20",
     "sanitize-html": "^1.20.0",
     "winston": "^2.4.0"
