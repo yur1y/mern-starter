@@ -13,8 +13,8 @@ router.get('/', async (req, res) => {
     res.send(post);
 });
 
-router.get('/:id', [auth, validateObjectId], async (req, res) => {
-    const post = await Post.findById(req.params.id);
+router.get('/:slug', [auth], async (req, res) => {
+    const post = await Post.findOne({slug:req.params.slug}).select('-__v');
 
     if (!post) return res.status(404).send('The post with the given ID was not found.');
 
@@ -25,12 +25,12 @@ router.post('/', auth, async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const {name,content} =req.body;
-    let post = await Post.findOne({name});
-
+    const {title,content,userId} =req.body;
+    let post = await Post.findOne({title});
+    console.log(req.body)
     if (post) return res.status(400).send('Post with the same name already exist.');
 
-    post = new Post({name:sanitizeHtml(name), content:sanitizeHtml(content), slug:slug(name.toLowerCase(), { lowercase: true })});
+    post = new Post({title:sanitizeHtml(title), content:sanitizeHtml(content), slug:slug(title.toLowerCase(), { lowercase: true }),userId});
     post = await post.save();
 
     res.send(post);
@@ -39,8 +39,8 @@ router.post('/', auth, async (req, res) => {
 router.put('/:id', [auth, validateObjectId], async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const {name,content} = req.body;
-    const post = await Post.findByIdAndUpdate(req.params.id, {name, content}, {
+    const {title,content} = req.body;
+    const post = await Post.findByIdAndUpdate(req.params.id, {title, content}, {
         //return updated post object
         new: true
     });
