@@ -1,4 +1,5 @@
 {
   "db": "mongodb://localhost/mern-starter",
-  "jwtPrivateKey":"mern-starter_jwtPrivateKey"
+  "jwtPrivateKey":"mern-starter_jwtPrivateKey",
+  "requiresAuth": true
 }
