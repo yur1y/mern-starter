@@ -3,16 +3,16 @@ import { apiUrl } from "../config.json";
 
 const apiEndpoint = apiUrl + "/posts";
 
-function postUrl(id) {
-    return `${apiEndpoint}/${id}`;
+function postUrl(slug) {
+    return `${apiEndpoint}/${slug}`;
 }
 
 export function getPosts() {
     return http.get(apiEndpoint);
 }
 
-export function getPost(postId) {
-    return http.get(postUrl(postId));
+export function getPost(slug) {
+    return http.get(postUrl(slug));
 }
 
 export function savePost(post) {
