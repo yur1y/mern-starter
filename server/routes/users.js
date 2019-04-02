@@ -4,8 +4,8 @@ const {User, validate} = require('../models/user');
 const express = require('express');
 const router = express.Router();
 
-router.get('/user', auth, async (req, res) => {
-    const user = await User.findById(req.user._id).select('-password');
+router.get('/:id', async (req, res) => {
+    const user = await User.findById(req.params.id).select('-password');
     res.send(user);
 });
 
@@ -24,7 +24,11 @@ router.post('/', async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    res.header('x-auth-token', token).send({_id ,  name ,  email});
+    res
+        .header("x-auth-token", token)
+        .header("access-control-expose-headers", "x-auth-token")
+        .send(user);
+
 });
 
 module.exports = router;
