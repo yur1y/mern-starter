@@ -1,12 +1,20 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 class Post extends Component{
+    state = {}
+
+    componentDidMount() {
+        const {post}=  this.props;
+        this.setState({post})
+    }
      render() {
 
         const {post}=  this.props;
+        const {user }= this.props.user
 
-         const {user }= this.props.user
         return (
 
             <div className="card mx-auto" style={{'width': '18rem', 'marginBottom': '20px'}}>
@@ -20,8 +28,8 @@ class Post extends Component{
                     {user && post.userId === user._id && (
                         <Link to={`/posts/edit/${post.slug}`}
                               className="card-link btn btn-outline-success">Edit</Link>)}
-                    {user && post.userId === user._id && user.isAdmin && (
-                        <button className="card-link btn btn-outline-danger">Delete</button>)}
+                    {user  && user.isAdmin && (
+                        <button onClick={()=>this.props.onDelete(post)}  className="card-link btn btn-outline-danger">Delete</button>)}
                 </div>
             </div>
         );

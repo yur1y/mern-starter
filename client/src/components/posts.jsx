@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import {getPosts} from "../services/postService";
+import { toast } from "react-toastify";
+import {deletePost, getPosts} from "../services/postService";
 import Post from "./post";
 import {getProfile} from "../services/userService";
 
@@ -10,6 +11,22 @@ class Posts extends Component {
         posts: [],
         user:null
     };
+
+    handleDelete =async post =>{
+
+        const originalPosts = this.state.posts;
+        const posts = originalPosts.filter(p => p._id !== post._id);
+        this.setState({ posts});
+
+        try {
+            await deletePost(post._id);
+        } catch (ex) {
+            if (ex.response && ex.response.status === 404)
+                toast.error("This movie has already been deleted.");
+
+            this.setState({ posts: originalPosts});
+        }
+    }
 
     async componentDidMount() {
         const {data: posts} = await getPosts();
@@ -43,7 +60,7 @@ class Posts extends Component {
 
                      {!posts && <p className="col-12 d-flex justify-content-around"> no posts yet</p>}
 
-                     {posts && posts.map(post => (<Post  key={post._id} post={post} user={user}/>))}
+                     {posts && posts.map(post => (<Post key={post._id} post={post} user={user} onDelete={this.handleDelete} />))}
                  </div>
              </div>
 
