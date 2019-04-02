@@ -11,6 +11,6 @@ export function register(user) {
     });
 }
 
-export function getProfile() {
-    return http.get(apiEndpoint+'/me')
+export function getProfile(id) {
+    return http.get(`${apiEndpoint}/${id}`)
 }
