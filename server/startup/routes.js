@@ -4,10 +4,8 @@ const users = require('../routes/users');
 const auth = require('../routes/auth');
 const posts =require('../routes/post')
 const comments =require('../routes/comment')
-const cors = require('cors');
 
 module.exports = (app) => {
-    app.use(cors());
     app.use(express.json());
      app.use('/api/users', users);
     app.use('/api/auth', auth);
