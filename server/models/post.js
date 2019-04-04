@@ -25,9 +25,9 @@ const postSchema = new mongoose.Schema({
         required: true,
         default: new Date()
     },
-    userId:{
-        type:String,
-        required:true
+    userId: {
+        type: String,
+        required: true
     }
 });
 
@@ -37,9 +37,9 @@ function validatePost(post) {
     const schema = {
         title: Joi.string().min(5).max(50).required(),
         content: Joi.string().min(1).max(8192).required(),
-        userId:Joi.string().required(),
+        userId: Joi.string().required(),
         createdAt: Joi.string(),
-        slug:Joi.string()
+        slug: Joi.string()
     };
 
     return Joi.validate(post, schema);

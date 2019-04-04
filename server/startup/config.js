@@ -1,7 +1,6 @@
 const config = require('config');
-var fs = require('fs');
 
-module.exports = function() {
+module.exports = function () {
     if (!config.get('db')) {
         throw new Error('FATAL ERROR: db is not defined.');
     }

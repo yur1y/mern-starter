@@ -1,4 +1,3 @@
-
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
@@ -10,17 +9,17 @@ const commentSchema = new mongoose.Schema({
             minlength: 1,
             maxlength: 8192
         },
-    userId:{
-        type:String,
-        required:true
+    userId: {
+        type: String,
+        required: true
     },
-    postId:{
-        type:String,
-        required:true
+    postId: {
+        type: String,
+        required: true
     },
     createdAt: {
         type: Date,
-        required:true,
+        required: true,
         default: new Date()
     }
 });
@@ -29,12 +28,14 @@ const Comment = mongoose.model('Comment', commentSchema);
 
 function validateComment(comment) {
     const schema = {
-         text:Joi.string().min(1).max(8192).required()
+        text: Joi.string().min(1).max(8192).required(),
+        userId: Joi.string(),
+        postId: Joi.string()
     };
 
     return Joi.validate(comment, schema);
 }
 
-exports.commentSchema= commentSchema;
-exports.Comment= Comment;
+exports.commentSchema = commentSchema;
+exports.Comment = Comment;
 exports.validate = validateComment;
