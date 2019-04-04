@@ -9,7 +9,7 @@ class PostsForm extends Form {
         data: {
             title: "",
             content: "",
-            userId:""
+            userId: ""
         },
         errors: {}
     };
@@ -18,7 +18,7 @@ class PostsForm extends Form {
         _id: Joi.string(),
         userId: Joi.string(),
         slug: Joi.string(),
-        createdAt:Joi.string(),
+        createdAt: Joi.string(),
         title: Joi.string()
             .required()
             .label("Title").min(5).max(50),
@@ -40,9 +40,8 @@ class PostsForm extends Form {
             else {
 
                 const state = {...this.state.data};
-                state.userId =user._id
-                this.setState({data:state})
-         console.log(this.state.data)
+                state.userId = user._id
+                this.setState({data: state})
             }
 
         } catch (ex) {
@@ -50,16 +49,14 @@ class PostsForm extends Form {
                 this.props.history.replace("/not-found");
         }
     }
-     doSubmit = async () => {
 
+    doSubmit = async () => {
         await savePost(this.state.data);
-
         this.props.history.push("/posts");
     }
+
     async componentDidMount() {
-
         await this.getPost();
-
     }
 
 

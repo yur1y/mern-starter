@@ -1,5 +1,5 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
+import {apiUrl} from "../config.json";
 
 const apiEndpoint = apiUrl + "/posts";
 
@@ -17,7 +17,7 @@ export function getPost(slug) {
 
 export function savePost(post) {
     if (post._id) {
-        const body = { ...post };
+        const body = {...post};
         delete body._id;
         return http.put(postUrl(post._id), body);
     }

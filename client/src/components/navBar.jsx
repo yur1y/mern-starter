@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
-const NavBar = ({ user }) => {
+const NavBar = ({user}) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +18,7 @@ const NavBar = ({ user }) => {
                 aria-expanded="false"
                 aria-label="Toggle navigation"
             >
-                <span className="navbar-toggler-icon" />
+                <span className="navbar-toggler-icon"/>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
@@ -28,7 +28,7 @@ const NavBar = ({ user }) => {
                     {user && user.isAdmin && (
                         <React.Fragment>
                             <NavLink className="nav-item nav-link" to="/comments">
-                               All Comments
+                                All Comments
                             </NavLink>
                         </React.Fragment>
                     )}

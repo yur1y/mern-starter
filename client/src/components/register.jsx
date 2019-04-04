@@ -6,7 +6,7 @@ import auth from "../services/authService";
 
 class RegisterForm extends Form {
     state = {
-        data: { username: "", password: "", name: "" },
+        data: {username: "", password: "", name: ""},
         errors: {}
     };
 
@@ -31,9 +31,9 @@ class RegisterForm extends Form {
             window.location = "/";
         } catch (ex) {
             if (ex.response && ex.response.status === 400) {
-                const errors = { ...this.state.errors };
+                const errors = {...this.state.errors};
                 errors.username = ex.response.data;
-                this.setState({ errors });
+                this.setState({errors});
             }
         }
     };
